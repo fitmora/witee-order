@@ -8,11 +8,8 @@
   :root{ --bg:#fafafa;--card:#fff;--bd:#e5e7eb;--muted:#64748b;--em:#0a7cff; --control-h:44px; }
   *{ box-sizing:border-box }
   body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; padding:24px; max-width:960px; margin:auto; background:var(--bg); color:#111; }
-  
-  /* [수정] 헤더 영역 스타일: 제목과 주문방법 버튼 양쪽 정렬 */
-  .main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-  .main-header h1 { margin: 0; font-size:22px; }
-  
+  h1{ font-size:22px; margin:0 0 10px }
+
   /* 주문방법 링크 버튼 스타일 */
   .btn-link { 
     background: none; 
@@ -20,8 +17,8 @@
     color: var(--em); 
     cursor: pointer; 
     font-weight: 600; 
-    font-size: 15px; 
-    padding: 8px 4px; 
+    font-size: 14px; 
+    padding: 4px 0; 
     text-decoration: none;
   }
   .btn-link:hover { text-decoration: underline; }
@@ -72,6 +69,7 @@
   .addr-input{ flex:1 1 auto; min-width:0; }
   .addr-btn{ flex:0 0 auto; white-space:nowrap; }
 
+  /* [PC용 그리드] */
   .item-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:12px; grid-template-areas: "url qty size discount notes"; }
   .col-url{ grid-area:url; } .col-qty{ grid-area:qty; } .col-size{ grid-area:size; } .col-discount{ grid-area:discount; } .col-notes{ grid-area:notes; }
 
@@ -82,7 +80,7 @@
   .btn-resp{ width:33.333%; }
   .note-text{ text-align:center; margin-top:6px; }
 
-  /* 기본 모달 스타일 (알림용) */
+  /* 모달 스타일 */
   .modal{ position:fixed; inset:0; background:rgba(0,0,0,.4); display:none; align-items:center; justify-content:center; padding:16px; z-index:9990; }
   .modal.open{ display:flex; }
   .modal-card{ width:min(520px, 96vw); background:#fff; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.2); overflow:hidden; }
@@ -95,10 +93,10 @@
   .btn-submit-order { width: 50%; background-color: #2563eb; color: white; padding: 12px 0; border-radius: 10px; font-weight: 700; font-size: 16px; margin: 8px auto; display: block; cursor: pointer; }
   .btn-submit-order:hover { background-color: #1d4ed8; }
 
-  /* [신규] 안내 이미지 모달 스타일 */
-  .info-modal { z-index: 9999; } /* 알림 모달보다 위에 뜨도록 */
+  /* 안내 이미지 모달 스타일 */
+  .info-modal { z-index: 9999; } 
   .info-modal-content { position: relative; max-width: 95vw; max-height: 90vh; overflow: auto; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); background: transparent; }
-  .info-img { display: block; width: 100%; height: auto; max-width: 800px; /* 이미지가 너무 크면 제한 */ margin: 0 auto; }
+  .info-img { display: block; width: 100%; height: auto; max-width: 800px; margin: 0 auto; }
   .info-close-btn { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
   .info-close-btn:hover { background: rgba(0,0,0,0.8); }
 
@@ -107,20 +105,44 @@
     .card{ max-width:100%; }
     .row-3{ grid-template-columns:1fr; }
     .row{ grid-template-columns:1fr; }
-    .item-grid{ grid-template-columns:1fr 1fr 1fr 1fr 1fr; grid-template-areas:
-        "url url url url url" "qty size discount notes notes"; }
+    
+    /* [수정 1] 모바일 아이템 그리드 재배치 (3등분) */
+    .item-grid {
+      grid-template-columns: 1fr 1fr 1fr; /* 3등분 균등 분배 */
+      grid-template-areas:
+        "url url url"             /* 1행: URL 전체 */
+        "qty size discount"       /* 2행: 수량, 사이즈, 할인율 */
+        "notes notes notes";      /* 3행: 메모 전체 */
+    }
+
     .btn-resp{ width:100%; }
     .note-text{ text-align:right; }
     .btn-confirm, .btn-submit-order { width: 80%; }
+
+    /* [수정 3] 상품추가 버튼 줄바꿈 방지 및 배치 수정 */
+    #items_fieldset .flex {
+      flex-wrap: wrap; /* 공간 부족시 줄바꿈 허용 */
+    }
+    #addItem {
+      white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+      flex: 0 0 auto;
+    }
+    .right.hint {
+      margin-left: 0;
+      margin-top: 8px; /* 위 요소와 간격 */
+      width: 100%; /* 줄바꿈 시 전체 너비 사용 */
+      text-align: right;
+    }
   }
 </style>
 </head>
 <body>
 
-<header class="main-header">
-  <h1>공동구매 주문</h1>
+<h1>공동구매 주문</h1>
+
+<div style="display: flex; justify-content: flex-end; margin-bottom: 4px;">
   <button type="button" id="btnHowTo" class="btn-link">주문방법</button>
-</header>
+</div>
 
 <fieldset id="buyer_fieldset">
   <legend>주문자 정보</legend>
@@ -243,7 +265,7 @@ function handleModalClick() {
 }
 modalBtn.addEventListener('click', handleModalClick);
 
-/* ===== [신규] 주문방법 안내 모달 로직 ===== */
+/* ===== 주문방법 안내 모달 로직 ===== */
 const infoModal = $('#infoModal');
 const btnHowTo = $('#btnHowTo');
 const infoCloseBtn = $('#infoCloseBtn');
@@ -326,7 +348,7 @@ function createItemRow(idx){
         <input name="size" class="control" type="text" placeholder="예: 285 / 100" />
       </div>
       <div class="col-discount">
-        <label>할인 *</label>
+        <label>할인율 *</label>
         ${discountSelectHTML()}
       </div>
       <div class="col-notes">
