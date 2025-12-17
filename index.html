@@ -10,18 +10,8 @@
   body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; padding:24px; max-width:960px; margin:auto; background:var(--bg); color:#111; }
   h1{ font-size:22px; margin:0 0 10px }
 
-  /* 주문방법 링크 버튼 스타일 */
-  .btn-link { 
-    background: none; 
-    border: none; 
-    color: var(--em); 
-    cursor: pointer; 
-    font-weight: 600; 
-    font-size: 14px; 
-    padding: 4px 0; 
-    text-decoration: none;
-  }
-  .btn-link:hover { text-decoration: underline; }
+  .btn-link { background:none; border:none; color:var(--em); cursor:pointer; font-weight:600; font-size:14px; padding:4px 0; text-decoration:none; }
+  .btn-link:hover { text-decoration:underline; }
 
   fieldset{ border:1px solid var(--bd); border-radius:12px; padding:16px; margin:16px 0; background:var(--card) }
   legend{ padding:0 6px; color:#334155; font-weight:700 }
@@ -29,7 +19,6 @@
 
   .control{ width:100%; height:var(--control-h); padding:10px 12px; border:1px solid #cbd5e1; border-radius:10px; background:#fff; line-height:calc(var(--control-h) - 22px); font-size:16px; appearance:none; }
   input[type="number"].control{ appearance:auto; }
-  input[type="number"].control::-webkit-inner-spin-button, input[type="number"].control::-webkit-outer-spin-button{ -webkit-appearance:auto; margin:0; }
   select.control{
     padding-right:28px;
     background-image:linear-gradient(45deg,transparent 50%,#94a3b8 50%),linear-gradient(135deg,#94a3b8 50%,transparent 50%);
@@ -37,50 +26,47 @@
     background-size:6px 6px; background-repeat:no-repeat;
   }
 
-  .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px }
   .row-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px }
-
   .flex{ display:flex; gap:10px; align-items:center }
   .right{ margin-left:auto }
   .muted{ color:#64748b; font-size:14px }
   .hint{ font-size:12px; color:#475569 }
+  
   button{ padding:12px 16px; border:0; border-radius:10px; background:var(--em); color:#fff; font-weight:700; cursor:pointer }
   button:disabled{ opacity:.5; cursor:not-allowed }
   .btn-ghost{ background:#f1f5f9; color:#0f172a }
-  .result{ margin-top:16px }
+  
   .card{ border:1px solid var(--bd); border-radius:12px; padding:16px; margin:16px 0; background:var(--card); box-shadow:0 2px 8px rgba(0,0,0,.05); max-width:960px }
   .card h3{ margin:0 0 12px; font-size:18px }
   .row2{ display:flex; justify-content:space-between; gap:12px; margin:6px 0 }
-  .row2 strong{ font-weight:700 }
   .hr{ height:1px; background:#e5e7eb; margin:10px 0 }
 
+  /* [PC용 테이블] */
   .table{ width:100%; border-collapse:collapse; margin-top:8px }
-  .table th,.table td{ padding:8px 10px; border-bottom:1px solid #eee; vertical-align:middle; white-space:nowrap; }
-  .table thead th{ text-align:center }
-  .table tbody td{ text-align:center }
-  .table tbody td:nth-child(2){ text-align:left; white-space:normal }
+  .table th { padding:10px; border-bottom:2px solid #eee; text-align:center; background:#f8fafc; font-size:14px; white-space:nowrap; }
+  .table td { padding:10px; border-bottom:1px solid #eee; vertical-align:middle; text-align:center; font-size:14px; }
+  /* 상품명 좌측 정렬 */
+  .table th:first-child, .table td:first-child { text-align:left; }
+  .table td:first-child { white-space: normal; word-break: keep-all; }
 
-  .badge-group{ display:inline-block; padding:2px 8px; border-radius:9999px; background:#f1f5f9; color:#334155; font-size:12px; }
   .url{ color:#0a7cff; text-decoration:none; word-break:break-all }
   .subtle{ color:#64748b; font-size:12px }
   .item-box{ border:1px dashed #d1d5db; border-radius:10px; padding:12px; background:#fff }
 
-  .addr-row{ display:flex; gap:8px; align-items:center; white-space:nowrap; }
-  .addr-input{ flex:1 1 auto; min-width:0; }
-  .addr-btn{ flex:0 0 auto; white-space:nowrap; }
+  .addr-row{ display:flex; gap:8px; align-items:center; }
+  .addr-input{ flex:1; }
+  .addr-btn{ flex:0 0 auto; }
 
-  /* [PC용 그리드] */
+  /* [PC용 입력 그리드] */
   .item-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:12px; grid-template-areas: "url qty size discount notes"; }
   .col-url{ grid-area:url; } .col-qty{ grid-area:qty; } .col-size{ grid-area:size; } .col-discount{ grid-area:discount; } .col-notes{ grid-area:notes; }
 
   .debug{ display:none; }
   .debug-on .debug{ display:block; }
-
-  .btn-wrap{ display:flex; justify-content:center; }
-  .btn-resp{ width:33.333%; }
+  .btn-wrap{ display:flex; justify-content:center; margin-top: 16px; }
   .note-text{ text-align:center; margin-top:6px; }
 
-  /* 모달 스타일 */
+  /* 모달 */
   .modal{ position:fixed; inset:0; background:rgba(0,0,0,.4); display:none; align-items:center; justify-content:center; padding:16px; z-index:9990; }
   .modal.open{ display:flex; }
   .modal-card{ width:min(520px, 96vw); background:#fff; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.2); overflow:hidden; }
@@ -93,46 +79,79 @@
   .btn-submit-order { width: 50%; background-color: #2563eb; color: white; padding: 12px 0; border-radius: 10px; font-weight: 700; font-size: 16px; margin: 8px auto; display: block; cursor: pointer; }
   .btn-submit-order:hover { background-color: #1d4ed8; }
 
-  /* 안내 이미지 모달 스타일 */
   .info-modal { z-index: 9999; } 
   .info-modal-content { position: relative; max-width: 95vw; max-height: 90vh; overflow: auto; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); background: transparent; }
   .info-img { display: block; width: 100%; height: auto; max-width: 800px; margin: 0 auto; }
   .info-close-btn { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
   .info-close-btn:hover { background: rgba(0,0,0,0.8); }
 
+  /* [모바일 스타일] */
   @media (max-width: 768px){
     body{ padding:16px; max-width:100%; }
     .card{ max-width:100%; }
     .row-3{ grid-template-columns:1fr; }
-    .row{ grid-template-columns:1fr; }
     
-    /* [수정 1] 모바일 아이템 그리드 재배치 (3등분) */
+    /* [수정 1] 입력 폼 그리드: URL(1줄) / 수량,사이즈,할인(3분할) / 메모(1줄) */
     .item-grid {
-      grid-template-columns: 1fr 1fr 1fr; /* 3등분 균등 분배 */
+      grid-template-columns: 1fr 1fr 1fr;
       grid-template-areas:
-        "url url url"             /* 1행: URL 전체 */
-        "qty size discount"       /* 2행: 수량, 사이즈, 할인율 */
-        "notes notes notes";      /* 3행: 메모 전체 */
+        "url url url"
+        "qty size discount"
+        "notes notes notes";
     }
 
     .btn-resp{ width:100%; }
     .note-text{ text-align:right; }
     .btn-confirm, .btn-submit-order { width: 80%; }
 
-    /* [수정 3] 상품추가 버튼 줄바꿈 방지 및 배치 수정 */
-    #items_fieldset .flex {
-      flex-wrap: wrap; /* 공간 부족시 줄바꿈 허용 */
+    #items_fieldset .flex { flex-wrap: wrap; }
+    #addItem { white-space: nowrap; flex: 0 0 auto; }
+    .right.hint { margin-left: 0; margin-top: 8px; width: 100%; text-align: right; }
+
+    /* [수정 2] 주문확인 테이블 -> 카드 뷰 변환 (모바일 가독성 핵심) */
+    .table, .table tbody, .table tr, .table td { display: block; width: 100%; }
+    .table thead { display: none; } /* 헤더 숨김 */
+    
+    .table tr {
+      margin-bottom: 15px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    #addItem {
-      white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-      flex: 0 0 auto;
-    }
-    .right.hint {
-      margin-left: 0;
-      margin-top: 8px; /* 위 요소와 간격 */
-      width: 100%; /* 줄바꿈 시 전체 너비 사용 */
+    
+    .table td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       text-align: right;
+      padding: 8px 0;
+      border-bottom: 1px dashed #f1f5f9;
+      font-size: 14px;
     }
+    .table td:last-child { border-bottom: none; }
+
+    /* 상품명(첫번째 칸) 강조 */
+    .table td:first-child {
+      display: block;
+      text-align: left;
+      font-weight: 700;
+      font-size: 16px;
+      color: #1e293b;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
+      margin-bottom: 6px;
+    }
+
+    /* data-label 속성을 이용해 항목명(가격, 수량 등) 표시 */
+    .table td::before {
+      content: attr(data-label);
+      font-weight: 600;
+      color: #64748b;
+      margin-right: auto; /* 왼쪽 정렬 */
+    }
+    .table td:first-child::before { display: none; } /* 상품명엔 라벨 숨김 */
   }
 </style>
 </head>
@@ -256,7 +275,7 @@ function formatPhoneKR(d){
   return d.slice(0,11).replace(/(\d{3})(\d{4})(\d{4}).*/, '$1-$2-$3');
 }
 
-/* ===== 알림 모달 로직 ===== */
+/* ===== 모달 로직 ===== */
 const modal = $('#modal'), modalMsg = $('#modalMsg'), modalBtn = $('#modalBtn');
 let isSuccessAction = false; 
 function handleModalClick() {
@@ -265,45 +284,30 @@ function handleModalClick() {
 }
 modalBtn.addEventListener('click', handleModalClick);
 
-/* ===== 주문방법 안내 모달 로직 ===== */
 const infoModal = $('#infoModal');
 const btnHowTo = $('#btnHowTo');
 const infoCloseBtn = $('#infoCloseBtn');
-
-// 열기
-btnHowTo.addEventListener('click', () => {
-  infoModal.classList.add('open');
-});
-// 닫기 (버튼 클릭)
-infoCloseBtn.addEventListener('click', () => {
-  infoModal.classList.remove('open');
-});
-// 닫기 (배경 클릭)
-infoModal.addEventListener('click', (e) => {
-  if (e.target === infoModal) infoModal.classList.remove('open');
-});
-
-// ESC 키 공통 처리
+btnHowTo.addEventListener('click', () => { infoModal.classList.add('open'); });
+infoCloseBtn.addEventListener('click', () => { infoModal.classList.remove('open'); });
+infoModal.addEventListener('click', (e) => { if (e.target === infoModal) infoModal.classList.remove('open'); });
 document.addEventListener('keydown', (e)=>{ 
   if(e.key==='Escape') {
     if (infoModal.classList.contains('open')) infoModal.classList.remove('open');
     else if (modal.classList.contains('open')) handleModalClick();
   }
 });
-
 function openModalHTML(html, success = false){ 
   modalMsg.innerHTML = html; 
   modal.classList.add('open'); 
   isSuccessAction = success; 
 }
 
-/* ===== 상태 ===== */
+/* ===== 상태 & 리스너 ===== */
 let mode = 'edit';
 let lastValidated = null; 
 let submitting = false;
 const MAX_ITEMS = Infinity;
 
-/* ===== 이벤트 리스너 ===== */
 $('#addr_search').addEventListener('click', () => {
   if ($('#addr_search').disabled) return;
   new daum.Postcode({
@@ -316,7 +320,6 @@ $('#addr_search').addEventListener('click', () => {
     }
   }).open();
 });
-
 $('#buyer_phone').addEventListener('input', function() {
   const raw = this.value;
   const selStart = this.selectionStart || 0;
@@ -358,7 +361,7 @@ function createItemRow(idx){
     </div>
     <div class="flex" style="margin-top:8px">
       <button type="button" class="btn-ghost remove">– 제거</button>
-      <span class="muted">필수: URL / 수량 / 사이즈 / 할인</span>
+      <span class="muted">필수: URL / 수량 / 사이즈 / 할인율</span>
     </div>
   `;
   el.querySelector('.remove').addEventListener('click', () => {
@@ -383,7 +386,7 @@ addItemBtn.addEventListener('click', () => {
   refreshControls();
 });
 
-/* ===== 페이로드 생성 ===== */
+/* ===== 페이로드 생성/검증 ===== */
 function buildPayload(){
   const buyer = {
     name:   $('#buyer_name').value.trim(),
@@ -408,13 +411,11 @@ function buildPayload(){
   });
   return { groups: [{ ...buyer, items }] };
 }
-
 function validateRequired(payload){
   const g = payload?.groups?.[0];
   if (!g || !g.name || !g.email || !g.address) return { ok:false, msg:'주문자 정보를 모두 입력해 주세요.' };
   if (!g.phone || g.phone.length < 10) return { ok:false, msg:'연락처를 올바르게 입력해 주세요.' };
   if (!g.items.length) return { ok:false, msg:'상품을 추가해 주세요.' };
-  
   for(let i=0; i<g.items.length; i++){
     const it = g.items[i];
     if(!/^https?:\/\//i.test(it.product_url)) return { ok:false, msg:`#${i+1} 상품 URL을 확인해 주세요.` };
@@ -423,7 +424,7 @@ function validateRequired(payload){
   return { ok:true };
 }
 
-/* ===== 검토(Validate) 요청 ===== */
+/* ===== 검토/전송 ===== */
 async function doValidate(){
   const payload = buildPayload();
   const vReq = validateRequired(payload);
@@ -451,7 +452,6 @@ async function doValidate(){
   }
 }
 
-/* ===== 화면 전환 ===== */
 function enterReview(){
   mode = 'review';
   btn.textContent = '주문 수정하기';
@@ -476,7 +476,7 @@ function showReviewHeader(title){
   reviewHeader.style.display = 'block';
 }
 
-/* ===== 렌더링 ===== */
+/* [수정] 렌더링 함수: 모바일 카드 뷰를 위한 data-label 추가 */
 function renderOrderCard(resp){
   result.innerHTML = '';
   if (!resp?.ok){
@@ -495,13 +495,13 @@ function renderOrderCard(resp){
     return `
       <tr>
         <td>
-          <div style="font-weight:500">${name}</div>
+          <div style="font-weight:700">${name}</div>
           <div class="subtle"><a href="${esc(it.product_url)}" target="_blank" class="url">상품 페이지 열기</a> · 사이즈: ${esc(it.size)}${it.notes?` · 메모: ${esc(it.notes)}`:''}</div>
         </td>
-        <td>${krw(price)}</td>
-        <td>${disc}</td>
-        <td>${it.qty}</td>
-        <td style="text-align:right">${krw(it.total)}</td>
+        <td data-label="가격">${krw(price)}</td>
+        <td data-label="할인율">${disc}</td>
+        <td data-label="수량">${it.qty}</td>
+        <td data-label="소계" style="text-align:right; font-weight:bold">${krw(it.total)}</td>
       </tr>`;
   }).join('');
 
@@ -510,7 +510,7 @@ function renderOrderCard(resp){
       <h3>주문 정보</h3>
       <table class="table">
         <thead>
-          <tr><th>상품명</th><th>가격</th><th>할인</th><th>수량</th><th style="text-align:right">소계</th></tr>
+          <tr><th>상품명</th><th>가격</th><th>할인율</th><th>수량</th><th style="text-align:right">소계</th></tr>
         </thead>
         <tbody>${rows}</tbody>
       </table>
@@ -535,7 +535,6 @@ function renderOrderCard(resp){
   $('#confirmBtn').addEventListener('click', submitFinal);
 }
 
-/* ===== 최종 제출 (Submit) ===== */
 async function submitFinal(){
   if (submitting) return;
 
@@ -548,7 +547,6 @@ async function submitFinal(){
        payload.groups[0].items = payload.groups[0].items.map((it, i) => {
          const v = validItems[i];
          
-         // 브랜드 접두사 제거
          let rawName = v.name || '';
          let cleanName = rawName.replace(/^.*온유어마크[^|]*\|\s*/i, '').trim();
          if (!cleanName) cleanName = rawName;
