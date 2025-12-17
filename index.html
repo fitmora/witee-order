@@ -45,7 +45,6 @@
   .table{ width:100%; border-collapse:collapse; margin-top:8px }
   .table th { padding:10px; border-bottom:2px solid #eee; text-align:center; background:#f8fafc; font-size:14px; white-space:nowrap; }
   .table td { padding:10px; border-bottom:1px solid #eee; vertical-align:middle; text-align:center; font-size:14px; }
-  /* 상품명 좌측 정렬 */
   .table th:first-child, .table td:first-child { text-align:left; }
   .table td:first-child { white-space: normal; word-break: keep-all; }
 
@@ -57,13 +56,20 @@
   .addr-input{ flex:1; }
   .addr-btn{ flex:0 0 auto; }
 
-  /* [PC용 입력 그리드] */
   .item-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:12px; grid-template-areas: "url qty size discount notes"; }
   .col-url{ grid-area:url; } .col-qty{ grid-area:qty; } .col-size{ grid-area:size; } .col-discount{ grid-area:discount; } .col-notes{ grid-area:notes; }
 
   .debug{ display:none; }
   .debug-on .debug{ display:block; }
   .btn-wrap{ display:flex; justify-content:center; margin-top: 16px; }
+  
+  /* [수정] PC/태블릿에서 버튼 크기 33.333%로 정확히 고정 */
+  .btn-resp { 
+    width: 33.333%; 
+    min-width: 200px; /* 너무 작아지는 것 방지 */
+    flex-shrink: 0;   /* flex 컨테이너 안에서 줄어들지 않도록 고정 */
+  }
+  
   .note-text{ text-align:center; margin-top:6px; }
 
   /* 모달 */
@@ -85,13 +91,11 @@
   .info-close-btn { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
   .info-close-btn:hover { background: rgba(0,0,0,0.8); }
 
-  /* [모바일 스타일] */
   @media (max-width: 768px){
     body{ padding:16px; max-width:100%; }
     .card{ max-width:100%; }
     .row-3{ grid-template-columns:1fr; }
     
-    /* [수정 1] 입력 폼 그리드: URL(1줄) / 수량,사이즈,할인(3분할) / 메모(1줄) */
     .item-grid {
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-areas:
@@ -100,7 +104,9 @@
         "notes notes notes";
     }
 
+    /* 모바일에서는 버튼 100% 꽉 차게 */
     .btn-resp{ width:100%; }
+    
     .note-text{ text-align:right; }
     .btn-confirm, .btn-submit-order { width: 80%; }
 
@@ -108,9 +114,9 @@
     #addItem { white-space: nowrap; flex: 0 0 auto; }
     .right.hint { margin-left: 0; margin-top: 8px; width: 100%; text-align: right; }
 
-    /* [수정 2] 주문확인 테이블 -> 카드 뷰 변환 (모바일 가독성 핵심) */
+    /* 모바일 카드 뷰 */
     .table, .table tbody, .table tr, .table td { display: block; width: 100%; }
-    .table thead { display: none; } /* 헤더 숨김 */
+    .table thead { display: none; }
     
     .table tr {
       margin-bottom: 15px;
@@ -132,7 +138,6 @@
     }
     .table td:last-child { border-bottom: none; }
 
-    /* 상품명(첫번째 칸) 강조 */
     .table td:first-child {
       display: block;
       text-align: left;
@@ -144,14 +149,13 @@
       margin-bottom: 6px;
     }
 
-    /* data-label 속성을 이용해 항목명(가격, 수량 등) 표시 */
     .table td::before {
       content: attr(data-label);
       font-weight: 600;
       color: #64748b;
-      margin-right: auto; /* 왼쪽 정렬 */
+      margin-right: auto;
     }
-    .table td:first-child::before { display: none; } /* 상품명엔 라벨 숨김 */
+    .table td:first-child::before { display: none; }
   }
 </style>
 </head>
@@ -476,7 +480,7 @@ function showReviewHeader(title){
   reviewHeader.style.display = 'block';
 }
 
-/* [수정] 렌더링 함수: 모바일 카드 뷰를 위한 data-label 추가 */
+/* 렌더링 */
 function renderOrderCard(resp){
   result.innerHTML = '';
   if (!resp?.ok){
